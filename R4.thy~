@@ -88,6 +88,16 @@ text {*
 *}
 
 
+
+lemma prueba: " todos P ([] @ y) = (todos P [] \<and> todos P y)"
+proof -
+have "todos P [] \<equiv> True" by (simp)
+oops
+
+
+(*----------------------------------------------------------------------------*)
+
+
 lemma todos_append:
   "todos P (x @ y) = (todos P x \<and> todos P y)"
 proof (induct x)
@@ -108,8 +118,7 @@ text {*
 *}
 
 lemma "todos P (rev xs) = todos P xs"
-by (induct xs,simp,simp add: todos_append,auto)
-
+oops
 
 text {*
   --------------------------------------------------------------------- 
@@ -118,19 +127,8 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
-lemma "todos P (rev xs) = todos P xs" (is "?P xs")
-proof (induct xs) 
-show "?P []" by simp 
-next
-fix a xs
-assume HI: "?P xs"
-have "todos P (rev (a#xs)) = todos P ((rev xs) @ [a])" by simp
-also have "... = (todos P(rev xs) \<and> todos P [a])" by (simp add: todos_append)
-also have "... = (todos P xs \<and> todos P [a])" using HI by simp
-also have "... = (todos P [a] \<and> todos P xs)" by (simp add: HOL.conj_commute)
-also have "... = todos P([a]@(xs))" by (simp)
-finally show  "todos P (rev (a#xs))= todos P (a # xs)" by simp
-qed
+lemma "todos P (rev xs) = todos P xs"
+oops
 
 text {*
   --------------------------------------------------------------------- 
